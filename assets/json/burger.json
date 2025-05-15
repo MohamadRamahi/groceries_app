@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Organic bananas",
+    "rating": 3.8,
+    "price": 4.99,
+    "description": "7 pcs, Priceg",
+    "image": "assets/image/bananas.png"
+  },
+  {
+    "name": "Chicken Burger",
+    "description": "Crispy chicken fillet with mayo and pickles.",
+    "price": 18.5,
+    "image": "assets/image/bananas.png"
+
+  },
+  {
+    "name": "Organic bananas",
+    "rating": 3.8,
+    "price": 4.99,
+    "description": "7 pcs, Priceg",
+    "image": "assets/image/bananas.png"
+  },
+  {
+    "name": "Chicken Burger",
+    "description": "Crispy chicken fillet with mayo and pickles.",
+    "price": 18.5,
+    "image": "assets/image/bananas.png"
+
+  }
+]
