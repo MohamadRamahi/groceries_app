@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:groceries_app/cubit/cubit/best_selling_cubit.dart';
+import 'package:groceries_app/cubit/cubit/beverage_cubit.dart';
 import 'package:groceries_app/cubit/cubit/bottom_navbar_cubit.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
 import 'package:groceries_app/cubit/cubit/explore_cubit.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>CartCubit()),
         BlocProvider(create: (context)=>BottomNavCubit()),
         BlocProvider(create: (context)=>FavoriteProductsCubit()),
-        BlocProvider(create: (context)=>ExplorerCubit())
+        BlocProvider(create: (context)=>ExplorerCubit()),
+        BlocProvider(create: (context)=>BeverageCubit())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

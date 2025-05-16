@@ -7,5 +7,6 @@ const Color kBackgroundColor = Color(0xff53B175);
 const Color KbuttonColor = Color(0xff53B175);
 const Color kTextColor = Colors.black87;
 const String kLogoPath = 'assets/image/carrot.png';
+const Color kDivider = Color(0xffE2E2E2);
 
 

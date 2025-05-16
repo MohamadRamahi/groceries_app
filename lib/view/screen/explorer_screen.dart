@@ -5,6 +5,12 @@ import 'package:groceries_app/const.dart';
 import 'package:groceries_app/cubit/cubit/explore_cubit.dart';
 import 'package:groceries_app/cubit/cubit/explore_state.dart';
 import 'package:groceries_app/responsive.dart';
+import 'package:groceries_app/view/screen/bakery_scree.dart';
+import 'package:groceries_app/view/screen/beverage_screen.dart';
+import 'package:groceries_app/view/screen/cooking_oil_screen.dart';
+import 'package:groceries_app/view/screen/diary_screen.dart';
+import 'package:groceries_app/view/screen/fresh_frutes_screen.dart';
+import 'package:groceries_app/view/screen/meat_fish_screen.dart';
 import 'package:groceries_app/view/widget/product_card_widget.dart';
 import 'package:groceries_app/view/widget/search_widget.dart';
 
@@ -56,8 +62,31 @@ class ExplorerScreen extends StatelessWidget {
                               title: product.name1,
                               image: product.image1,
                               color: color,
+                              onTap: () {
+                                switch (product.name1.trim()) {
+                                  case 'Fresh Fruits \n & Vegetables':
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => FreshFruitsScreen()));
+                                    break;
+                                  case 'Cooking Oil \n & Ghee':
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => CookingOilScreen()));
+                                    break;
+                                  case 'Meat & Fish':
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => MeatFishScreen()));
+                                    break;
+                                  case 'Bakery & Snacks':
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => BakeryScreen()));
+                                    break;
+                                  case 'Diary & Eggs':
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => DiaryEggsScreen()));
+                                    break;
+                                  case 'Beverage':
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => BeverageScreen()));
+                                    break;
+                                }
+                              },
                             );
                           },
+
                         );
                       } else {
                         return const Center(child: CircularProgressIndicator());
