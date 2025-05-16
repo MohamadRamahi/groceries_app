@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:groceries_app/cubit/cubit/best_selling_cubit.dart';
 import 'package:groceries_app/cubit/cubit/bottom_navbar_cubit.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
+import 'package:groceries_app/cubit/cubit/explore_cubit.dart';
 import 'package:groceries_app/cubit/cubit/favorite_cubit.dart';
 import 'package:groceries_app/cubit/cubit/location_cubit.dart';
 import 'package:groceries_app/cubit/cubit/login_cubit.dart';
@@ -12,7 +12,6 @@ import 'package:groceries_app/cubit/cubit/onbording_cubit.dart';
 import 'package:groceries_app/cubit/cubit/signup_cubit.dart';
 import 'package:groceries_app/cubit/cubit/top_rated_cubit.dart';
 import 'package:groceries_app/view/main_screen.dart';
-import 'package:groceries_app/launch_decider.dart';
 import 'package:groceries_app/location_permission_screen.dart';
 import 'package:groceries_app/model/location_repository.dart';
 import 'package:groceries_app/splash_screen.dart';
@@ -46,8 +45,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>MeatAndChikenCubit()),
         BlocProvider(create: (context)=>CartCubit()),
         BlocProvider(create: (context)=>BottomNavCubit()),
-        BlocProvider(create: (context)=>FavoriteProductsCubit())
-        // Add LocationCubit here if needed
+        BlocProvider(create: (context)=>FavoriteProductsCubit()),
+        BlocProvider(create: (context)=>ExplorerCubit())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
