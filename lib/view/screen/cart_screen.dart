@@ -23,9 +23,9 @@ class _CartScreenState extends State<CartScreen> {
     final discount = 2.0;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: _buildLocationIcon(),
         title: LocationTitleWidget(),

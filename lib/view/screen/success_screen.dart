@@ -9,6 +9,7 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding:  EdgeInsets.symmetric(horizontal: responsiveWidth(context, 24)),
         child: Center(
@@ -89,7 +90,7 @@ class SuccessScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'Cancel',
+                        'Go To Home',
                         style: TextStyle(
                           fontSize: responsiveWidth(context, 18),
                           color: Colors.black,
