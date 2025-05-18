@@ -1,182 +1,241 @@
-// import 'package:flutter/material.dart';
-// import 'package:foodtek/responsive.dart';
-// import 'package:foodtek/view/screens/checkout_screen.dart';
-//
-//
-// Widget buildCheckoutSection(
-//     BuildContext context,
-//     double subTotal,
-//     double deliveryCharge,
-//     double discount, {
-//       required VoidCallback onPlaceOrderTap,
-//     }) {  double total = subTotal + deliveryCharge - discount;
-//
-//   return Container(
-//     width: double.infinity,
-//     margin: EdgeInsets.all(responsiveWidth(context, 16)),
-//     padding: EdgeInsets.symmetric(
-//       horizontal: responsiveWidth(context, 20),
-//       vertical: responsiveHeight(context, 24),
-//     ),
-//     decoration: BoxDecoration(
-//       color: Color(0xff4FAF5A),
-//       borderRadius: BorderRadius.circular(24),
-//       image: DecorationImage(
-//         image: AssetImage('assets/images/Pattern.png'),
-//         fit: BoxFit.cover,
-//       ),
-//     ),
-//     child: Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         _buildPriceRow("Sub-Total", subTotal),
-//         SizedBox(height: responsiveHeight(context, 10)),
-//         _buildPriceRow("Delivery Charge", deliveryCharge),
-//         SizedBox(height: responsiveHeight(context, 10)),
-//         _buildPriceRow("Discount", discount, isDiscount: true),
-//         SizedBox(height: responsiveHeight(context, 16)),
-//         _buildPriceRow("Total:", total, isTotal: true),
-//         SizedBox(height: responsiveHeight(context, 16)),
-//         GestureDetector(
-//           onTap: () {
-//             Navigator.pushNamed(context, '/checkout');
-//           },
-//
-//           child: Container(
-//             height: responsiveHeight(context, 56),
-//             decoration: BoxDecoration(
-//               color: Colors.white,
-//               borderRadius: BorderRadius.circular(16),
-//             ),
-//             child: Center(
-//               child: Text(
-//                 "Place My Order",
-//                 style: TextStyle(
-//                   color: Color(0xff4FAF5A),
-//                   fontWeight: FontWeight.bold,
-//                   fontSize: responsiveWidth(context, 16),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         )
-//
-//       ],
-//     ),
-//   );
-// }
-//
-// Widget _buildPriceRow(String label, double amount, {bool isDiscount = false, bool isTotal = false}) {
-//   return Row(
-//     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//     children: [
-//       Text(
-//         label,
-//         style: TextStyle(
-//           color: Colors.white,
-//           fontSize: isTotal ? 18 : 14,
-//           fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-//         ),
-//       ),
-//       Text(
-//         "${isDiscount ? '-' : ''}${amount.toStringAsFixed(2)} \$",
-//         style: TextStyle(
-//           color: Colors.white,
-//           fontSize: isTotal ? 20 : 14,
-//           fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-//         ),
-//       ),
-//     ],
-//   );
-// }
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:groceries_app/const.dart';
+import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
 import 'package:groceries_app/responsive.dart';
+import 'package:groceries_app/view/screen/success_screen.dart';
 
-Widget buildCheckoutSection(BuildContext context,
-    double subTotal,
-    double deliveryCharge,
-    double discount,
-    ) {
-
-
-  double total = subTotal + deliveryCharge - discount;
-
+Widget buildCheckoutSection(BuildContext context, double totalAmount) {
   return Container(
     width: double.infinity,
     margin: EdgeInsets.all(responsiveWidth(context, 16)),
-    padding: EdgeInsets.symmetric(
-      horizontal: responsiveWidth(context, 20),
-      vertical: responsiveHeight(context, 24),
-    ),
-    decoration: BoxDecoration(
-      color: Color(0xff4FAF5A),
-      borderRadius: BorderRadius.circular(7),
+    child: GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+          ),
+          isScrollControlled: true,
+          builder: (context) => SizedBox(
+            height: responsiveHeight(context, 550),
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: responsiveWidth(context, 20),
+                vertical: responsiveHeight(context, 20),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Checkout',
+                        style: TextStyle(
+                          fontSize: responsiveWidth(context, 24),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          color: Color(0xff181725),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Divider(),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Delivery',
+                        style: TextStyle(
+                          fontSize: responsiveWidth(context, 18),
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff7C7C7C),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text('Select Method'),
+                          SizedBox(width: responsiveWidth(context, 8)),
+                          Icon(Icons.arrow_forward_ios, size: responsiveWidth(context, 16)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Divider(),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Payment',
+                        style: TextStyle(
+                          fontSize: responsiveWidth(context, 18),
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff7C7C7C),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text('Select Method'),
+                          SizedBox(width: responsiveWidth(context, 8)),
+                          Icon(Icons.arrow_forward_ios, size: responsiveWidth(context, 16)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Divider(),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Promo Code',
+                        style: TextStyle(
+                          fontSize: responsiveWidth(context, 18),
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff7C7C7C),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text('Select Method'),
+                          SizedBox(width: responsiveWidth(context, 8)),
+                          Icon(Icons.arrow_forward_ios, size: responsiveWidth(context, 16)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Divider(),
+                  SizedBox(height: responsiveHeight(context, 18)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Total Cost',
+                        style: TextStyle(
+                          fontSize: responsiveWidth(context, 18),
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff7C7C7C),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(' \$${totalAmount.toStringAsFixed(2)}'),
+                          SizedBox(width: responsiveWidth(context, 8)),
+                          Icon(Icons.arrow_forward_ios, size: responsiveWidth(context, 16)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: responsiveHeight(context, 20)),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<CartCubit>().clearCart();
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SuccessScreen())); // Close BottomSheet
 
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Sub-Total Row
-        _buildPriceRow("Sub-Total", subTotal),
-        SizedBox(height: responsiveHeight(context, 10)),
+                      Future.delayed(Duration(milliseconds: 300), () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SuccessScreen()),
+                        );
 
-        // Delivery Charge Row
-        _buildPriceRow("Delivery Charge", deliveryCharge),
-        SizedBox(height: responsiveHeight(context, 10)),
-
-        // Discount Row
-        _buildPriceRow("Discount", discount, isDiscount: true),
-        SizedBox(height: responsiveHeight(context, 16)),
-
-        // Total Row
-        _buildPriceRow("Total:", total, isTotal: true),
-        SizedBox(height: responsiveHeight(context, 16)),
-
-        // Place My Order Button
-        GestureDetector(
-          child: Container(
-            height: responsiveHeight(context, 56),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(7),
-            ),
-            child: Center(
-              child: Text(
-                "Place My Order",
-                style: TextStyle(
-                  color: Color(0xff4FAF5A),
-                  fontWeight: FontWeight.bold,
-                  fontSize: responsiveWidth(context, 16),
-                ),
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Order placed successfully!"),
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: KbuttonColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(19),
+                      ),
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: responsiveHeight(context, 67),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: responsiveWidth(context, 24),
+                          vertical: responsiveHeight(context, 12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Place Order',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: responsiveWidth(context, 16),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
+        );
+      },
+      child: Container(
+        height: responsiveHeight(context, 64),
+        decoration: BoxDecoration(
+          color: KbuttonColor,
+          borderRadius: BorderRadius.circular(19),
         ),
-      ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: responsiveWidth(context, 20)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Go to Checkout",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: responsiveWidth(context, 18),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: responsiveWidth(context, 12),
+                  vertical: responsiveHeight(context, 8),
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xFF489E67),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  "\$${totalAmount.toStringAsFixed(2)}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: responsiveWidth(context, 16),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     ),
-  );
-}
-
-Widget _buildPriceRow(String label, double amount, {bool isDiscount = false, bool isTotal = false}) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        label,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: isTotal ? 18 : 14,
-          fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-      Text(
-        "${isDiscount ? '-' : ''}${amount.toStringAsFixed(2)} \$",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: isTotal ? 20 : 14,
-          fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-    ],
   );
 }

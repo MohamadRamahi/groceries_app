@@ -142,7 +142,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 SizedBox(height: responsiveHeight(context, 16),),
                 NutritionSection(),
                 SizedBox(
-                  height: responsiveHeight(context, 20),
+                  height: responsiveHeight(context, 30),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -152,12 +152,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     );
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text("تمت إضافة ${currentProduct.name} إلى السلة"),
+                        content: Text("Successful add ${currentProduct.name}to basket"),
                         duration: Duration(seconds: 2),
                         action: SnackBarAction(
-                          label: 'عرض السلة',
+                          label: 'Show basket',
                           onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/home'); // ✅ هذا ينقلك إلى MainScreen
+                            Navigator.pushReplacementNamed(context, '/home');
 
                           },
                         ),

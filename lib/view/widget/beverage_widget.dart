@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:groceries_app/cubit/cubit/beverage_cubit.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
+import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/product_details_screen.dart';
 
 import '../../../model/product_model.dart';
@@ -84,14 +85,14 @@ class BeverageWidget extends StatelessWidget {
                 product["name"],
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: screenWidth * 0.038,
+                  fontSize: responsiveWidth(context, 14),
                 ),
               ),
               Text(
                 product["description"],
                 style: TextStyle(
-                  fontSize: screenWidth * 0.030,
-                  color: const Color(0xff3B3B3B),
+                  fontSize: responsiveWidth(context, 10),
+                  color:  Color(0xff3B3B3B),
                 ),
               ),
               const SizedBox(height: 6),
@@ -101,7 +102,7 @@ class BeverageWidget extends StatelessWidget {
                   Text(
                     "\$${product["price"]}",
                     style: TextStyle(
-                      fontSize: screenWidth * 0.035,
+                      fontSize: responsiveWidth(context, 14),
                       color: const Color(0xff25AE4B),
                       fontWeight: FontWeight.bold,
                     ),
@@ -121,8 +122,9 @@ class BeverageWidget extends StatelessWidget {
       width: 30,
       height: 30,
       decoration: const BoxDecoration(
-        color: Color(0xff25AE4B),
-        shape: BoxShape.circle,
+          shape: BoxShape.rectangle,
+          color: Color(0xff25AE4B),
+          borderRadius: BorderRadius.all(Radius.circular(10))
       ),
       child: IconButton(
         padding: EdgeInsets.zero,

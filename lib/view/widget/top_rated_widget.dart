@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
 import 'package:groceries_app/cubit/cubit/top_rated_cubit.dart';
+import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/product_details_screen.dart';
 
 import '../../../model/product_model.dart';
@@ -73,7 +74,7 @@ class TopRatedProducts extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(left: 14, top: 10),
               ),
-              const SizedBox(height: 6),
+               SizedBox(height: responsiveHeight(context, 4)),
               _buildProductImage(product),
               _buildProductDetails(screenWidth, product, context),
             ],
@@ -85,8 +86,8 @@ class TopRatedProducts extends StatelessWidget {
 
 
   Widget _buildProductImage(Map<String, dynamic> product) {
-    return Container(
-      height: 60,
+    return SizedBox(
+      height: 50,
       width: double.infinity,
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
@@ -105,7 +106,7 @@ class TopRatedProducts extends StatelessWidget {
             product["name"],
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: screenWidth * 0.040,
+              fontSize:responsiveWidth(context, 14),
               color:  Colors.black,
             ),
           ),
@@ -114,7 +115,7 @@ class TopRatedProducts extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontSize: screenWidth * 0.030,
+              fontSize: responsiveWidth(context, 12),
               color:  const Color(0xff3B3B3B),
             ),
           ),
@@ -126,7 +127,7 @@ class TopRatedProducts extends StatelessWidget {
                 "\$${product["price"]}",
                 style: TextStyle(
                   color: const Color(0xff25AE4B),
-                  fontSize: screenWidth * 0.035,
+                  fontSize:responsiveWidth(context, 14),
                 ),
               ),
               _buildAddButton(screenWidth, context, product), // Pass the product
@@ -142,8 +143,9 @@ class TopRatedProducts extends StatelessWidget {
       width: 30,
       height: 30,
       decoration: const BoxDecoration(
-        shape: BoxShape.circle,
+        shape: BoxShape.rectangle,
         color: Color(0xff25AE4B),
+        borderRadius: BorderRadius.all(Radius.circular(10))
       ),
       child: Center(
         child: IconButton(

@@ -13,7 +13,7 @@ class BeverageScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children:  [
-              Text('data',style: TextStyle(fontSize: 
+              Text('Beverage',style: TextStyle(fontSize:
               responsiveWidth(context, 20)),),
               BeverageWidget(),
 

@@ -99,6 +99,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:groceries_app/cubit/cubit/location_cubit.dart';
 import 'package:groceries_app/model/user_location.dart';
+import 'package:groceries_app/responsive.dart';
 
 class LocationTitleWidget extends StatefulWidget {
 
@@ -163,7 +164,7 @@ class _LocationTitleWidgetState extends State<LocationTitleWidget> {
         Text(
           text,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: responsiveWidth(context, 14),
             fontWeight: FontWeight.w600,
             color: Colors.black
           ),

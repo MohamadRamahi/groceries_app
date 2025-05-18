@@ -160,8 +160,6 @@ class _CartScreenState extends State<CartScreen> {
               child: buildCheckoutSection(
                 context,
                 subTotal,
-                deliveryCharge,
-                discount,
               ),
             ),
           ],

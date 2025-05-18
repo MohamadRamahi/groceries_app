@@ -6,6 +6,7 @@ import 'package:groceries_app/cubit/cubit/best_selling_cubit.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
 import 'package:groceries_app/cubit/cubit/meat_and_chiken_cubit.dart';
 import 'package:groceries_app/cubit/cubit/top_rated_cubit.dart';
+import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/product_details_screen.dart';
 
 import '../../../model/product_model.dart';
@@ -87,8 +88,8 @@ class MeatAndChicken extends StatelessWidget {
   }
 
   Widget _buildProductImage(Map<String, dynamic> product) {
-    return Container(
-      height: 60,
+    return SizedBox(
+      height: 50,
       width: double.infinity,
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
@@ -107,7 +108,7 @@ class MeatAndChicken extends StatelessWidget {
             product["name"],
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: screenWidth * 0.040,
+              fontSize: responsiveWidth(context, 14),
               color:  Colors.black,
             ),
           ),
@@ -116,7 +117,7 @@ class MeatAndChicken extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontSize: screenWidth * 0.030,
+              fontSize: responsiveWidth(context, 12),
               color:  const Color(0xff3B3B3B),
             ),
           ),
@@ -128,7 +129,7 @@ class MeatAndChicken extends StatelessWidget {
                 "\$${product["price"]}",
                 style: TextStyle(
                   color: const Color(0xff25AE4B),
-                  fontSize: screenWidth * 0.035,
+                  fontSize:responsiveWidth(context, 14),
                 ),
               ),
               _buildAddButton(screenWidth, context, product), // Pass the product
@@ -144,8 +145,9 @@ class MeatAndChicken extends StatelessWidget {
       width: 30,
       height: 30,
       decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: Color(0xff25AE4B),
+          shape: BoxShape.rectangle,
+          color: Color(0xff25AE4B),
+          borderRadius: BorderRadius.all(Radius.circular(10))
       ),
       child: Center(
         child: IconButton(
