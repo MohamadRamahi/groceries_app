@@ -11,6 +11,7 @@ import 'package:groceries_app/cubit/cubit/fresh_frutes_cubit.dart';
 import 'package:groceries_app/cubit/cubit/location_cubit.dart';
 import 'package:groceries_app/cubit/cubit/login_cubit.dart';
 import 'package:groceries_app/cubit/cubit/meat_and_chiken_cubit.dart';
+import 'package:groceries_app/cubit/cubit/meat_and_fish_cubit.dart';
 import 'package:groceries_app/cubit/cubit/onbording_cubit.dart';
 import 'package:groceries_app/cubit/cubit/signup_cubit.dart';
 import 'package:groceries_app/cubit/cubit/top_rated_cubit.dart';
@@ -52,7 +53,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>ExplorerCubit()),
         BlocProvider(create: (context)=>BeverageCubit()),
         BlocProvider(create: (context)=>FreshFrutesCubit()),
-        BlocProvider(create: (context)=>FoodStuffCubit())
+        BlocProvider(create: (context)=>FoodStuffCubit()),
+        BlocProvider(create: (context)=>MeatAndFishCubit())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

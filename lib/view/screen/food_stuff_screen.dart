@@ -15,8 +15,10 @@ class FoodStuffScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children:  [
-              Text('Beverage',style: TextStyle(fontSize:
-              responsiveWidth(context, 20)),),
+              Text('Food',style: TextStyle(
+                  fontSize:responsiveWidth(context, 20),
+                  fontWeight:FontWeight.w600 ),
+              ),
               FoodStuffWidget(),
 
             ],
