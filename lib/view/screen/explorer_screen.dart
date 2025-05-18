@@ -7,7 +7,7 @@ import 'package:groceries_app/cubit/cubit/explore_state.dart';
 import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/bakery_scree.dart';
 import 'package:groceries_app/view/screen/beverage_screen.dart';
-import 'package:groceries_app/view/screen/cooking_oil_screen.dart';
+import 'package:groceries_app/view/screen/food_stuff_screen.dart';
 import 'package:groceries_app/view/screen/diary_screen.dart';
 import 'package:groceries_app/view/screen/fresh_frutes_screen.dart';
 import 'package:groceries_app/view/screen/meat_fish_screen.dart';
@@ -67,8 +67,8 @@ class ExplorerScreen extends StatelessWidget {
                                   case 'Fresh Fruits \n & Vegetables':
                                     Navigator.push(context, MaterialPageRoute(builder: (_) => FreshFruitsScreen()));
                                     break;
-                                  case 'Cooking Oil \n & Ghee':
-                                    Navigator.push(context, MaterialPageRoute(builder: (_) => CookingOilScreen()));
+                                  case 'Food Stuff':
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) => FoodStuffScreen()));
                                     break;
                                   case 'Meat & Fish':
                                     Navigator.push(context, MaterialPageRoute(builder: (_) => MeatFishScreen()));

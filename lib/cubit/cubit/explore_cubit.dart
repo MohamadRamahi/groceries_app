@@ -9,7 +9,7 @@ class ExplorerCubit extends Cubit<ExplorerState> {
     final List<Product2> products = List.generate(6, (index) {
       final names = [
         'Fresh Fruits \n & Vegetables',
-        'Cooking Oil \n & Ghee',
+        'Food Stuff',
         'Meat & Fish',
         'Bakery & Snacks',
         'Diary & Eggs',
