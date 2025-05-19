@@ -5,7 +5,7 @@ import 'package:groceries_app/const.dart';
 import 'package:groceries_app/cubit/cubit/explore_cubit.dart';
 import 'package:groceries_app/cubit/cubit/explore_state.dart';
 import 'package:groceries_app/responsive.dart';
-import 'package:groceries_app/view/screen/bakery_scree.dart';
+import 'package:groceries_app/view/screen/bakery_screen.dart';
 import 'package:groceries_app/view/screen/beverage_screen.dart';
 import 'package:groceries_app/view/screen/food_stuff_screen.dart';
 import 'package:groceries_app/view/screen/diary_screen.dart';
