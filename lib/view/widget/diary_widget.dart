@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:groceries_app/cubit/cubit/bakery_cubit.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
 import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/product_details_screen.dart';
 
 import '../../../model/product_model.dart';
+import '../../cubit/cubit/diary_cubit.dart';
 
-class BakeryWidget extends StatelessWidget {
-  const BakeryWidget({Key? key}) : super(key: key);
+class DiaryWidget extends StatelessWidget {
+  const DiaryWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return BlocProvider(
-      create: (context) => BakeryCubit(),
-      child: BlocBuilder<BakeryCubit, BakeryState>(
+      create: (context) => DiaryCubit(),
+      child: BlocBuilder<DiaryCubit, DiaryState>(
         builder: (context, state) {
-          if (state is BakeryLoaded) {
+          if (state is DiaryLoaded) {
             return Padding(
               padding: const EdgeInsets.all(12.0),
               child: GridView.builder(

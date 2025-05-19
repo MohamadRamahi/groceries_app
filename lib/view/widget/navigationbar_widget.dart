@@ -7,26 +7,24 @@ import 'package:groceries_app/view/screen/home_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class NavigationbarWidget extends StatefulWidget {
+  // static controller for external access
+  static final PersistentTabController controller =
+  PersistentTabController(initialIndex: 0);
+
+  const NavigationbarWidget({Key? key}) : super(key: key);
+
   @override
   _NavigationbarWidgetState createState() => _NavigationbarWidgetState();
 }
 
 class _NavigationbarWidgetState extends State<NavigationbarWidget> {
-  late PersistentTabController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
-  }
-
   List<Widget> _buildScreens() {
     return [
       HomeScreen(),
       ExplorerScreen(),
       CartScreen(),
       FavoritesScreen(),
-      ProfileScreen()
+      ProfileScreen(),
     ];
   }
 
@@ -69,7 +67,7 @@ class _NavigationbarWidgetState extends State<NavigationbarWidget> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      controller: _controller,
+      controller: NavigationbarWidget.controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
       backgroundColor: Colors.white,
@@ -80,7 +78,7 @@ class _NavigationbarWidgetState extends State<NavigationbarWidget> {
         borderRadius: BorderRadius.circular(10.0),
         colorBehindNavBar: Colors.white,
       ),
-      navBarStyle: NavBarStyle.style6, // Try different styles here
+      navBarStyle: NavBarStyle.style6,
     );
   }
 }

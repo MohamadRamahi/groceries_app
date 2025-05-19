@@ -18,7 +18,6 @@ class ProductCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double cardHeight = responsiveHeight(context, 200);
-    final double imageHeight = responsiveHeight(context, 120);
 
     return GestureDetector(
       onTap: onTap,
@@ -30,16 +29,15 @@ class ProductCardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: imageHeight,
+            Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
                   image,
                   fit: BoxFit.contain,
-                  height: responsiveHeight(context, 20),
-                  width: responsiveWidth(context, 80),
+                  width: double.infinity,
                 ),
               ),
             ),

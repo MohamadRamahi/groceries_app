@@ -3,6 +3,8 @@ import 'package:groceries_app/const.dart';
 import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/home_screen.dart';
 
+import '../widget/navigationbar_widget.dart';
+
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});
 
@@ -69,11 +71,10 @@ class SuccessScreen extends StatelessWidget {
                 height: responsiveHeight(context, 12),
               ),
               ElevatedButton(
-                onPressed: () => Navigator.push(
-                    context, MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
-                ),
-                ),
+              onPressed: (){
+                Navigator.pop(context); // لإغلاق صفحة التفاصيل
+                NavigationbarWidget.controller.index = 0;
+              },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(

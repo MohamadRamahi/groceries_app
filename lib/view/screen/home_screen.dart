@@ -41,8 +41,7 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.location_on, color: Color(0xff393636)),
-                    SizedBox(width: responsiveWidth(context, 8)),
+                    Icon(Icons.location_on, color: Color(0xff393636)), SizedBox(width: responsiveWidth(context, 8)),
                     LocationTitleWidget(),
                   ],
                 ),

@@ -6,6 +6,7 @@ import 'package:groceries_app/cubit/cubit/favorite_cubit.dart';
 import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/home_screen.dart';
 import 'package:groceries_app/view/widget/favorite_widget.dart';
+import 'package:groceries_app/view/widget/navigationbar_widget.dart';
 import 'package:groceries_app/view/widget/nutritions_widget.dart';
 import 'package:groceries_app/view/widget/product_detail_section.dart';
 import 'package:groceries_app/view/widget/quantity_selector.dart';
@@ -147,27 +148,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ElevatedButton(
                   onPressed: () {
                     context.read<CartCubit>().addToCart(
-                        product: currentProduct,
-                        quantity: quantity,
+                      product: currentProduct,
+                      quantity: quantity,
                     );
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text("Successful add ${currentProduct.name}to basket"),
+                        content: Text(
+                            "Successfully added ${currentProduct.name} to basket",style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700
+                        ),),
                         duration: Duration(seconds: 2),
-                        action: SnackBarAction(
-                          label: 'Show basket',
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/home');
+                        backgroundColor:KbuttonColor,
 
-                          },
-                        ),
                       ),
+
                     );
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                          (route) => false,
-                    );
+
+                    Navigator.pop(context); // لإغلاق صفحة التفاصيل
+                    NavigationbarWidget.controller.index = 0; // الرجوع إلى تبويب Home
+
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: KbuttonColor, // Use your defined green color
