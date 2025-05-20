@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:groceries_app/cubit/cubit/bakery_cubit.dart';
+import 'package:groceries_app/cubit/cubit/all_product_cubit.dart';
 import 'package:groceries_app/cubit/cubit/best_selling_cubit.dart';
-import 'package:groceries_app/cubit/cubit/beverage_cubit.dart';
 import 'package:groceries_app/cubit/cubit/bottom_navbar_cubit.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
-import 'package:groceries_app/cubit/cubit/diary_cubit.dart';
-import 'package:groceries_app/cubit/cubit/food_stuff_cubit.dart';
 import 'package:groceries_app/cubit/cubit/explore_cubit.dart';
 import 'package:groceries_app/cubit/cubit/favorite_cubit.dart';
-import 'package:groceries_app/cubit/cubit/fresh_frutes_cubit.dart';
 import 'package:groceries_app/cubit/cubit/location_cubit.dart';
 import 'package:groceries_app/cubit/cubit/login_cubit.dart';
 import 'package:groceries_app/cubit/cubit/meat_and_chiken_cubit.dart';
-import 'package:groceries_app/cubit/cubit/meat_and_fish_cubit.dart';
 import 'package:groceries_app/cubit/cubit/onbording_cubit.dart';
 import 'package:groceries_app/cubit/cubit/signup_cubit.dart';
 import 'package:groceries_app/cubit/cubit/top_rated_cubit.dart';
@@ -53,12 +48,14 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>BottomNavCubit()),
         BlocProvider(create: (context)=>FavoriteProductsCubit()),
         BlocProvider(create: (context)=>ExplorerCubit()),
-        BlocProvider(create: (context)=>BeverageCubit()),
-        BlocProvider(create: (context)=>FreshFrutesCubit()),
-        BlocProvider(create: (context)=>FoodStuffCubit()),
-        BlocProvider(create: (context)=>MeatAndFishCubit()),
-        BlocProvider(create: (context)=>BakeryCubit()),
-        BlocProvider(create: (context)=>DiaryCubit())
+       // BlocProvider(create: (context)=>BeverageCubit()),
+        //BlocProvider(create: (context)=>FreshFrutesCubit()),
+       // BlocProvider(create: (context)=>FoodStuffCubit()),
+       // BlocProvider(create: (context)=>MeatAndFishCubit()),
+       // BlocProvider(create: (context)=>BakeryCubit()),
+        //BlocProvider(create: (context)=>DiaryCubit()),
+        BlocProvider(create: (context)=>AllProductsCubit()),
+       // BlocProvider(create: (context)=>SearchCubit(allProductsByCategory))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

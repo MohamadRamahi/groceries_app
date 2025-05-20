@@ -1,50 +1,109 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:groceries_app/cubit/cubit/beverage_cubit.dart';
+import 'package:groceries_app/cubit/cubit/all_product_cubit.dart';
+import 'package:groceries_app/cubit/cubit/all_product_state.dart';
 import 'package:groceries_app/cubit/cubit/cart_cubit.dart';
-import 'package:groceries_app/cubit/cubit/fresh_frutes_cubit.dart';
+import 'package:groceries_app/model/product_model.dart';
 import 'package:groceries_app/responsive.dart';
 import 'package:groceries_app/view/screen/product_details_screen.dart';
 
-import '../../../model/product_model.dart';
-
-class FreshFrutisWidget extends StatelessWidget {
+class FreshFrutisWidget extends StatefulWidget {
   const FreshFrutisWidget({Key? key}) : super(key: key);
+
+  @override
+  State<FreshFrutisWidget> createState() => _FreshFrutistState();
+}
+
+class _FreshFrutistState extends State<FreshFrutisWidget> {
+  late TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+    // تحميل منتجات المخبوزات مرة واحدة فقط
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AllProductsCubit>().loadProductsByCategory("fruits");
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    return BlocProvider(
-      create: (context) => FreshFrutesCubit(),
-      child: BlocBuilder<FreshFrutesCubit, FreshFrutesState>(
-        builder: (context, state) {
-          if (state is FreshFrutesLoaded) {
-            return Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(), // disables scroll if inside scrollable
-                shrinkWrap: true,
-                itemCount: state.products.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.72,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                ),
-                itemBuilder: (context, index) {
-                  final product = state.products[index];
-                  return _buildProductCard(screenWidth, product, context);
-                },
+    return Column(
+      children: [
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: responsiveWidth(context, 24),
+              vertical: responsiveHeight(context, 8)),
+          child: TextField(
+            controller: _searchController,
+            onChanged: (query) {
+              context.read<AllProductsCubit>().search(query);
+            },
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                vertical: responsiveHeight(context, 12),
               ),
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
+              hintText: 'Search fruits products...',
+              hintStyle: TextStyle(
+                color:Color(0xff7C7C7C),
+                fontSize: responsiveWidth(context, 14),
+              ),
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: _searchController.text.isNotEmpty
+                  ? IconButton(
+                icon: const Icon(Icons.clear),
+                onPressed: () {
+                  _searchController.clear();
+                  context.read<AllProductsCubit>().loadProductsByCategory("fruits");
+                },
+              )
+                  : null,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+
+              ),
+            ),
+          ),
+        ),
+
+        BlocBuilder<AllProductsCubit, AllProductsState>(
+          builder: (context, state) {
+            if (state is AllProductsLoaded) {
+              return Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: state.products.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.72,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = state.products[index];
+                    return _buildProductCard(screenWidth, product, context);
+                  },
+                ),
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
+      ],
     );
   }
 
+  // ⬇️ باقي الكود كما هو (بناء الكارد وزر الإضافة)
   Widget _buildProductCard(double screenWidth, Map<String, dynamic> product, BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -93,7 +152,7 @@ class FreshFrutisWidget extends StatelessWidget {
                 product["description"],
                 style: TextStyle(
                   fontSize: responsiveWidth(context, 10),
-                  color:  Color(0xff3B3B3B),
+                  color: const Color(0xff3B3B3B),
                 ),
               ),
               const SizedBox(height: 6),
@@ -123,9 +182,9 @@ class FreshFrutisWidget extends StatelessWidget {
       width: 30,
       height: 30,
       decoration: const BoxDecoration(
-          shape: BoxShape.rectangle,
-          color: Color(0xff25AE4B),
-          borderRadius: BorderRadius.all(Radius.circular(10))
+        shape: BoxShape.rectangle,
+        color: Color(0xff25AE4B),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: IconButton(
         padding: EdgeInsets.zero,
